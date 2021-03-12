@@ -1,0 +1,82 @@
+---
+
+- name: Disabling SELinux
+  selinux:
+    state: disabled
+  tags:
+    - common
+    - selinux
+
+- name: Stopping and disabling firewall service
+  service:
+    name: firewalld
+    state: stopped
+    enabled: no
+  tags:
+    - common
+    - firewall
+
+- name: Setting up timezone to Etc/GMT
+  timezone:
+    name: Etc/GMT
+  tags:
+    - common
+    - timezone
+
+- name: Cleaning YUM repository caches
+  shell: "yum clean all && rm -rf /var/cache/yum"
+  args:
+    warn: false
+  tags: common
+
+- name: Updating packages
+  yum:
+    name: '*'
+    state: latest
+  tags: common
+
+- name: Installing necessary packages
+  yum:
+    name:
+      - bind-utils
+      - bzip2
+      - curl
+      - htop
+      - iotop
+      - lsof
+      - nano
+      - nc
+      - net-tools
+      - nmap
+      - rsync
+      - screen
+      - sshpass
+      - tcpdump
+      - telnet
+      - tree
+      - unzip
+      - vim
+      - wget
+      - yum-utils
+      - zip
+    state: present
+  tags:
+    - common
+    - epel
+
+- name: Setting up Vim for "root" user
+  get_url:
+    url: "https://raw.githubusercontent.com/amix/vimrc/master/vimrcs/basic.vim"
+    dest: ~/.vimrc
+  tags:
+    - common
+    - user
+    - vim
+
+- name: Copying user limit configuration file
+    copy:
+    src: "/files/etc/security/limits.conf"
+    dest: /etc/security/limits.conf
+    tags: common
+    
+
