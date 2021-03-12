@@ -1,0 +1,20 @@
+---
+- name: Addding NGINX repository
+  yum_repository:
+    name: NGINX
+    description: NGINX YUM repository
+    baseurl: "http://nginx.org/packages/centos/7/x86_64/"
+    gpgcheck: no
+  tags: nginx
+
+- name: Installing NGINX
+  yum:
+    name: nginx
+    state: present
+  tags: nginx
+
+- name: Start NGiNX
+  service:
+    name: nginx
+    state: started
+  tags: nginx
