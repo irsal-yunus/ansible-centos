@@ -4,5 +4,6 @@
   roles:
   - nginx
   - geerlingguy.nodejs
+  - angular
   - ansible-role-postgresql
   - geerlingguy.java
