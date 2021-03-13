@@ -3,5 +3,6 @@
   become: true
   roles:
   - nginx
-  - ansible-role-nodejs
+  - geerlingguy.nodejs
   - ansible-role-postgresql
+  - geerlingguy.java
