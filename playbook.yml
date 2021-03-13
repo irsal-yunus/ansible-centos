@@ -3,7 +3,8 @@
   become: true
   roles:
   - nginx
-  - geerlingguy.nodejs
+  - nodejs
   - angular
-  - ansible-role-postgresql
-  - geerlingguy.java
+  - postgresql
+  - java
+  - kafka
